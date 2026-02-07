@@ -1,51 +1,62 @@
-// Default login
-if (!localStorage.getItem("user")) {
-  localStorage.setItem("user", JSON.stringify({
-    username: "admin",
-    password: "1234"
-  }));
-}
+// FIXED LOGIN CREDENTIALS
+const USERNAME = "WEBLIX";
+const PASSWORD = "ARUP2004";
 
+// LOGIN FUNCTION
 function login() {
-  let u = document.getElementById("username").value;
-  let p = document.getElementById("password").value;
+  const u = document.getElementById("username").value;
+  const p = document.getElementById("password").value;
 
-  let user = JSON.parse(localStorage.getItem("user"));
-
-  if (u === user.username && p === user.password) {
+  if (u === USERNAME && p === PASSWORD) {
     localStorage.setItem("loggedIn", "true");
     window.location.href = "dashboard.html";
   } else {
-    alert("Invalid login");
+    alert("Wrong Username or Password");
   }
 }
 
+// CHANGE PASSWORD (OPTIONAL – LOCAL ONLY)
 function savePassword() {
-  let newPass = document.getElementById("newPass").value;
-  let user = JSON.parse(localStorage.getItem("user"));
-  user.password = newPass;
-  localStorage.setItem("user", JSON.stringify(user));
-  alert("Password updated");
+  const newPass = document.getElementById("newPass").value;
+
+  if (newPass.length < 4) {
+    alert("Password too short");
+    return;
+  }
+
+  localStorage.setItem("customPassword", newPass);
+  alert("New password saved (local only)");
 }
 
+// ADD OFFER
 function addOffer() {
-  let offer = {
+  const offer = {
     url: offerUrl.value,
     details: details.value,
     price: price.value,
     device: device.value,
     country: country.value
   };
-  console.log("Offer Added:", offer);
+
+  let offers = JSON.parse(localStorage.getItem("offers")) || [];
+  offers.push(offer);
+  localStorage.setItem("offers", JSON.stringify(offers));
+
   alert("Offer Added Successfully");
+
+  offerUrl.value = "";
+  details.value = "";
+  price.value = "";
+  country.value = "";
 }
 
+// LOGOUT → HOME PAGE
 function logout() {
   localStorage.removeItem("loggedIn");
   window.location.href = "index.html";
 }
 
-// Protect dashboard
+// PROTECT DASHBOARD
 if (window.location.pathname.includes("dashboard")) {
   if (localStorage.getItem("loggedIn") !== "true") {
     window.location.href = "login.html";
