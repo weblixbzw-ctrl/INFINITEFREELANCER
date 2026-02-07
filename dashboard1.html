@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h2>Dashboard</h2>
+  <button onclick="logout()" class="btn">Logout</button>
+</header>
+
+<div class="card">
+  <h3>Create / Change Password</h3>
+  <input type="password" id="newPass" placeholder="New Password">
+  <button onclick="savePassword()">Save Password</button>
+</div>
+
+<div class="card">
+  <h3>Add Offer</h3>
+
+  <input type="text" id="offerUrl" placeholder="Offer URL">
+  <textarea id="details" placeholder="Offer Details"></textarea>
+  <input type="number" id="price" placeholder="Task Price">
+  
+  <select id="device">
+    <option>Android</option>
+    <option>iOS</option>
+    <option>Desktop</option>
+  </select>
+
+  <input type="text" id="country" placeholder="Country">
+  
+  <button onclick="addOffer()">Add Offer</button>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
