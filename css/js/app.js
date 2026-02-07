@@ -1,46 +1,53 @@
-// FIXED LOGIN
-const FIX_EMAIL = "Weblixbzw@gmail.com";
-const FIX_PASS = "Arup@2004";
+// Default login
+if (!localStorage.getItem("user")) {
+  localStorage.setItem("user", JSON.stringify({
+    username: "admin",
+    password: "1234"
+  }));
+}
 
-// LOGIN
 function login() {
-  let e = document.getElementById("email").value;
+  let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
 
-  if (e === FIX_EMAIL && p === FIX_PASS) {
-    localStorage.setItem("ownerLogin", "true");
-    window.location = "dashboard.html";
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  if (u === user.username && p === user.password) {
+    localStorage.setItem("loggedIn", "true");
+    window.location.href = "dashboard.html";
   } else {
-    alert("Wrong login");
+    alert("Invalid login");
   }
 }
 
-// LOGOUT
-function logout() {
-  localStorage.removeItem("ownerLogin");
-  window.location = "login.html";
+function savePassword() {
+  let newPass = document.getElementById("newPass").value;
+  let user = JSON.parse(localStorage.getItem("user"));
+  user.password = newPass;
+  localStorage.setItem("user", JSON.stringify(user));
+  alert("Password updated");
 }
 
-// COUNTRY LIST (SHORT – WILL EXTEND TO 150+)
-const countries = ["India","USA","UK","Canada","Germany","France"];
-
-countries.forEach(c => {
-  if (document.getElementById("country"))
-    country.innerHTML += `<option>${c}</option>`;
-  if (document.getElementById("filterCountry"))
-    filterCountry.innerHTML += `<option>${c}</option>`;
-});
-
-// ADD OFFER
 function addOffer() {
   let offer = {
-    title: title.value,
+    url: offerUrl.value,
+    details: details.value,
     price: price.value,
+    device: device.value,
     country: country.value
   };
+  console.log("Offer Added:", offer);
+  alert("Offer Added Successfully");
+}
 
-  let data = JSON.parse(localStorage.getItem("offers") || "[]");
-  data.push(offer);
-  localStorage.setItem("offers", JSON.stringify(data));
-  alert("Offer Added");
+function logout() {
+  localStorage.removeItem("loggedIn");
+  window.location.href = "index.html";
+}
+
+// Protect dashboard
+if (window.location.pathname.includes("dashboard")) {
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
 }
