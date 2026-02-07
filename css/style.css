@@ -1,54 +1,99 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
-  background: #f4f6f9;
 }
 
-.navbar {
-  background: #0f172a;
+body {
+  background: #f4f6f8;
+}
+
+/* Header */
+header {
+  background: #0b1c2d;
   color: white;
   padding: 15px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.navbar a {
+header nav a {
   color: white;
   margin-left: 15px;
+  text-decoration: none;
+  font-size: 14px;
 }
 
+/* Hero */
 .hero {
   background: #2563eb;
   color: white;
-  padding: 60px;
+  padding: 50px 20px;
   text-align: center;
 }
 
-.container {
-  padding: 30px;
+.hero h1 {
+  font-size: 28px;
+}
+
+.hero p {
+  margin: 10px 0;
+}
+
+.btn {
+  display: inline-block;
+  background: #16a34a;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Features */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  padding: 20px;
 }
 
 .card {
   background: white;
   padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.btn {
-  padding: 10px 20px;
-  background: green;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.blue { background: #2563eb; }
-.red { background: #ef4444; }
-
-.footer {
+  border-radius: 8px;
   text-align: center;
+}
+
+/* Pages */
+.page {
+  padding: 20px;
+}
+
+.offer {
+  background: white;
   padding: 15px;
-  background: #0f172a;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Footer */
+footer {
+  background: #0b1c2d;
   color: white;
+  text-align: center;
+  padding: 12px;
+  margin-top: 30px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
   }
+
+  header nav {
+    margin-top: 10px;
+  }
+}
